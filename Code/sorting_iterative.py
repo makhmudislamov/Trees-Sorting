@@ -23,10 +23,20 @@ def is_sorted(items):
 def bubble_sort(items):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Swap adjacent items that are out of order
+    Running time: >>> O(n^2) because there is a loop inside a loop
+    Memory usage: >>> O(1) because we are not creating new array but just modifying existing one"""
+    
+    while not is_sorted(items):
+        # Declaring neighboring elements of items array and resetting after reaching the end of the array
+        previous_element = 0
+        next_element = previous_element + 1
+        while previous_element < len(items) - 1:
+            # returning False at the first unsorted sequence
+            if items[previous_element] > items[next_element]:
+                items[previous_element], items[next_element] = items[next_element], items[previous_element]
+            previous_element += 1
+            next_element += 1
+
 
 
 def selection_sort(items):
@@ -50,5 +60,5 @@ def insertion_sort(items):
 
 
 if __name__ == '__main__':
-    items = [1, 2, 2, 4, 5, 6]
-    print(is_sorted(items))
+    items = [100, 2, 45, 77, 33]
+    print(bubble_sort(items))
