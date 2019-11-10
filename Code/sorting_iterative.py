@@ -47,6 +47,18 @@ def selection_sort(items):
     # TODO: Repeat until all items are in sorted order
     # TODO: Find minimum item in unsorted items
     # TODO: Swap it with first unsorted item
+    while not is_sorted(items):
+        # declare variable for iteration - item?
+        # while item < len(items) - 1:
+            # if item is the smallest in the array - how?
+            # swap this item with the first on in the array
+        
+        # how to check if the element is the smalles in the array
+        # option one  - use min[]
+
+    
+
+
 
 
 def insertion_sort(items):
