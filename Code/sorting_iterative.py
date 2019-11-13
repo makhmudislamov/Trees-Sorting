@@ -75,18 +75,26 @@ def insertion_sort(items):
     # TODO: Insert it in sorted order in front of items
 
 
-    # start = 0
-    # while start < len(items):
-    #     # current_unsorted = items [start]
+    sorted_start = 0
+    unsorted = 1
+    sorted_end = 0
 
-    #     while  start + 1 < len(items):
+    while unsorted < len(items): # iterating through unsorted part of the array
 
-    #         if items[start] > items[start + 1]:
-    #             items[start], items[start + 1] = items[start + 1], items[start]
+        sorted_end = sorted_start + 1
 
-    #     start += 1
+        while sorted_start < items[:sorted_end + 1] : # trying to iterate through starte and end of the sorted sublist
+
+            if items[unsorted] < items[sorted_start]:
+                sorted_end += 1
+                
+            
+                items[unsorted], items[sorted_start] = items[sorted_start], items[unsorted]
+                unsorted = sorted_end
+
+        
         
 
-# if __name__ == '__main__':
-#     items = [100, 2, 45, 77, 33]
-#     print(bubble_sort(items))
+if __name__ == '__main__':
+    items = [100, 2, 45, 77, 33]
+    print(bubble_sort(items))
