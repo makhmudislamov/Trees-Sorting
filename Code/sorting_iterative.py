@@ -78,23 +78,35 @@ def insertion_sort(items):
     sorted_start = 0
     unsorted = 1
     sorted_end = 0
-
+    j = 0
     while unsorted < len(items): # iterating through unsorted part of the array
 
-        sorted_end = sorted_start + 1
+        # sorted_end = sorted_end - 1
 
-        while sorted_start < items[:sorted_end + 1] : # trying to iterate through starte and end of the sorted sublist
+        while sorted_start < len(items[:unsorted+1]): # trying to iterate through starte and end of the sorted sublist
+            j = unsorted
+            print(f"before comparison: j: {items[j]}, sorted_end: {items[sorted_end]}")
+            if items[j] < items[sorted_end]:
+                print(f"j: {items[j]}, sorted_end: {items[sorted_end]}")
+                items[j], items[sorted_end] = items[sorted_end], items[j]
+                sorted_end -= 1
+                j -= 1
 
-            if items[unsorted] < items[sorted_start]:
-                sorted_end += 1
-                
+                print(f"after swap => j: {j}, sorted_end: {sorted_end}")
+            else:  # found position
+                print(f'items sorted left side: {items}')
+                break
+            if j == -1 or sorted_end == -1:
+                break
             
-                items[unsorted], items[sorted_start] = items[sorted_start], items[unsorted]
-                unsorted = sorted_end
+                
+        sorted_end = unsorted
+        unsorted += 1
 
         
         
 
 if __name__ == '__main__':
-    items = [100, 2, 45, 77, 33]
-    print(bubble_sort(items))
+    items = [100, 2, 45, 3, 77, 15, 33]
+    (insertion_sort(items))
+    print(f"final items: {items}")
