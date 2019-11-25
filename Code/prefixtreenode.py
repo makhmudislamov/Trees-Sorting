@@ -42,6 +42,8 @@ class PrefixTreeNode:
 
         if character in self.children:
             return True
+        else:
+            return False
 
     def get_child(self, character):
         """Return this prefix tree node's child node that represents the given
@@ -57,11 +59,12 @@ class PrefixTreeNode:
     def add_child(self, character, child_node):
         """Add the given character and child node as a child of this node, or
         raise ValueError if given character is amongst this node's children."""
-        # if not self.has_child(character):
-        #     # TODO: Add given character and child node to this node's children
-        # else:
-        #     raise ValueError(f'Child exists for character {character!r}')
-        pass
+        if not self.has_child(character):
+            # Add given character and child node to this node's children
+            self.children[character] = child_node
+        else:
+            raise ValueError(f'Child exists for character {character!r}')
+        
 
     def __repr__(self):
         """Return a code representation of this prefix tree node."""
