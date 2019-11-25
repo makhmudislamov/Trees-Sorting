@@ -23,14 +23,20 @@ class PrefixTreeNode:
 
     def is_terminal(self):
         """Return True if this prefix tree node terminates a string."""
-        # TODO: Determine if this node is terminal
-        # if not self.terminal:
-        #     return True
+        # Determine if this node is terminal
         return self.terminal
 
     def num_children(self):
         """Return the number of children nodes this prefix tree node has."""
-        # TODO: Determine how many children this node has
+        # Determine how many children this node has
+        num = 0
+        for child in self.children:
+            if child:
+                num += 1
+        return num
+
+
+
 
     def has_child(self, character):
         """Return True if this prefix tree node has a child node that
