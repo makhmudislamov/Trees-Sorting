@@ -36,6 +36,11 @@ class PrefixTree:
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
         # TODO
+        if self.size == 0:
+            return True
+        else:
+            return False
+
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
