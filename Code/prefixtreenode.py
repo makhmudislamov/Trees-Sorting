@@ -40,10 +40,7 @@ class PrefixTreeNode:
         represents the given character amongst its children."""
         #  Check if given character is amongst this node's children
 
-        if character in self.children:
-            return True
-        else:
-            return False
+        return character in self.children
 
     def get_child(self, character):
         """Return this prefix tree node's child node that represents the given

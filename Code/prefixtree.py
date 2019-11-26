@@ -35,20 +35,25 @@ class PrefixTree:
 
     def is_empty(self):
         """Return True if this prefix tree is empty (contains no strings)."""
-        # TODO
-        if self.size == 0:
-            return True
-        else:
-            return False
+        return self.size == 0
+       
 
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
         # TODO
+  
+
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
         # TODO
+        # start iteration from root
+        # iterate through the string
+        # insert each string to child nodes of the root
+        # and mark the last character of the string as terminal
+
+        
 
     def _find_node(self, string):
         """Return a tuple containing the node that terminates the given string
