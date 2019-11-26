@@ -42,6 +42,7 @@ class PrefixTree:
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
         # TODO
+        
   
 
 
@@ -50,10 +51,24 @@ class PrefixTree:
         # TODO
         # start iteration from root
         # iterate through the string
+        # if the character is not in the children node
         # insert each string to child nodes of the root
         # and mark the last character of the string as terminal
+        # update the size
 
-        
+        current_node = self.root
+
+        for index, char in enumerate(string):
+            if current_node.has_child(char):
+                current_node = current_node.get_child(char)
+            else:
+                current_node.add_child(char, PrefixTreeNode(char))
+                current_node = current_node.get_child(char)
+                # marking the last char as terminal 
+            if index == len(string) - 1:
+                current_node.terminal = True
+        self.size += 1
+            
 
     def _find_node(self, string):
         """Return a tuple containing the node that terminates the given string
