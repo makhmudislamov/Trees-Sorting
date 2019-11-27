@@ -38,12 +38,13 @@ class PrefixTree:
         return self.size == 0
        
 
-
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
         # TODO
-        
-  
+        result = self._find_node(string)
+        if result is not None:
+            return True
+        return False
 
 
     def insert(self, string):
@@ -58,15 +59,15 @@ class PrefixTree:
 
         current_node = self.root
 
-        for index, char in enumerate(string):
+        for _, char in enumerate(string):
             if current_node.has_child(char):
                 current_node = current_node.get_child(char)
             else:
                 current_node.add_child(char, PrefixTreeNode(char))
                 current_node = current_node.get_child(char)
                 # marking the last char as terminal 
-            if index == len(string) - 1:
-                current_node.terminal = True
+        
+        current_node.terminal = True
         self.size += 1
             
 
@@ -79,8 +80,19 @@ class PrefixTree:
         if len(string) == 0:
             return self.root, 0
         # Start with the root node
-        node = self.root
-        # TODO
+        current_node = self.root
+
+        for index, char in enumerate(string):
+            if current_node.has_child(char):
+                current_node = current_node.get_child(char)
+            else:
+                return None, index + 1
+        if current_node.terminal is True:
+            return current_node, index + 1
+        else:
+            return None, index + 1
+        
+
 
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
@@ -122,24 +134,24 @@ def create_prefix_tree(strings):
         result = tree.contains(string)
         print(f'contains({string!r}): {result}')
 
-    print('\nSearching for strings not in tree:')
-    prefixes = sorted(set(string[:len(string)//2] for string in strings))
-    for prefix in prefixes:
-        if len(prefix) == 0 or prefix in strings:
-            continue
-        result = tree.contains(prefix)
-        print(f'contains({prefix!r}): {result}')
+    # print('\nSearching for strings not in tree:')
+    # prefixes = sorted(set(string[:len(string)//2] for string in strings))
+    # for prefix in prefixes:
+    #     if len(prefix) == 0 or prefix in strings:
+    #         continue
+    #     result = tree.contains(prefix)
+    #     print(f'contains({prefix!r}): {result}')
 
-    print('\nCompleting prefixes in tree:')
-    for prefix in prefixes:
-        completions = tree.complete(prefix)
-        print(f'complete({prefix!r}): {completions}')
+    # print('\nCompleting prefixes in tree:')
+    # for prefix in prefixes:
+    #     completions = tree.complete(prefix)
+    #     print(f'complete({prefix!r}): {completions}')
 
-    print('\nRetrieving all strings:')
-    retrieved_strings = tree.strings()
-    print(f'strings: {retrieved_strings}')
-    matches = set(retrieved_strings) == set(strings)
-    print(f'matches? {matches}')
+    # print('\nRetrieving all strings:')
+    # retrieved_strings = tree.strings()
+    # print(f'strings: {retrieved_strings}')
+    # matches = set(retrieved_strings) == set(strings)
+    # print(f'matches? {matches}')
 
 
 if __name__ == '__main__':
