@@ -40,22 +40,17 @@ class PrefixTree:
 
     def contains(self, string):
         """Return True if this prefix tree contains the given string."""
-        # TODO
+     
         result = self._find_node(string)
-        if result is not None:
+        # result is a tuple thats why check 
+        # if the first item is None. Tuple itself cannot be None
+        if result[0] is not None:
             return True
         return False
 
 
     def insert(self, string):
         """Insert the given string into this prefix tree."""
-        # TODO
-        # start iteration from root
-        # iterate through the string
-        # if the character is not in the children node
-        # insert each string to child nodes of the root
-        # and mark the last character of the string as terminal
-        # update the size
 
         current_node = self.root
 
@@ -65,8 +60,7 @@ class PrefixTree:
             else:
                 current_node.add_child(char, PrefixTreeNode(char))
                 current_node = current_node.get_child(char)
-                # marking the last char as terminal 
-        
+        # marking the last char as terminal 
         current_node.terminal = True
         self.size += 1
             
@@ -79,15 +73,19 @@ class PrefixTree:
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
+        
         # Start with the root node
         current_node = self.root
 
         for index, char in enumerate(string):
             if current_node.has_child(char):
                 current_node = current_node.get_child(char)
+                print(f'cur node {char}')
             else:
                 return None, index + 1
+        # if the last char is terminal
         if current_node.terminal is True:
+            print("current node is terminal")
             return current_node, index + 1
         else:
             return None, index + 1
@@ -134,13 +132,13 @@ def create_prefix_tree(strings):
         result = tree.contains(string)
         print(f'contains({string!r}): {result}')
 
-    # print('\nSearching for strings not in tree:')
-    # prefixes = sorted(set(string[:len(string)//2] for string in strings))
-    # for prefix in prefixes:
-    #     if len(prefix) == 0 or prefix in strings:
-    #         continue
-    #     result = tree.contains(prefix)
-    #     print(f'contains({prefix!r}): {result}')
+    print('\nSearching for strings not in tree:')
+    prefixes = sorted(set(string[:len(string)//2] for string in strings))
+    for prefix in prefixes:
+        if len(prefix) == 0 or prefix in strings:
+            continue
+        result = tree.contains(prefix)
+        print(f'contains({prefix!r}): {result}')
 
     # print('\nCompleting prefixes in tree:')
     # for prefix in prefixes:
