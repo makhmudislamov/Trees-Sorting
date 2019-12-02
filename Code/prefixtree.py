@@ -91,13 +91,18 @@ class PrefixTree:
             return None, index + 1
         
 
-
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
         # TODO
+        # iterate through the tree
+        # check if the last char is terminal and has child
+        # if the char is terminal add the string to the list 
+        # continue the itration and check each child for terminal
+        # add each char=terminal case strings to the list
+        # return the list
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
