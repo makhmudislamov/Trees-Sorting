@@ -96,13 +96,12 @@ class PrefixTree:
         with the given prefix string."""
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
-        # iterate through the tree
-        # check if the last char is terminal and has child
-        # if the char is terminal add the string to the list 
-        # continue the itration and check each child for terminal
-        # add each char=terminal case strings to the list
-        # return the list
+
+        # base case - prefix is a finished string
+        if self._find_node(prefix) is True:
+            completions.append(prefix)
+
+
 
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
@@ -113,7 +112,11 @@ class PrefixTree:
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node and visit each node with the given function."""
-        # TODO
+        if node.terminal:
+            visit(prefix)
+
+        for char, child in node.children.items():
+            self._traverse(child, prefix+char, visit)
 
 
 def create_prefix_tree(strings):
@@ -145,10 +148,10 @@ def create_prefix_tree(strings):
         result = tree.contains(prefix)
         print(f'contains({prefix!r}): {result}')
 
-    # print('\nCompleting prefixes in tree:')
-    # for prefix in prefixes:
-    #     completions = tree.complete(prefix)
-    #     print(f'complete({prefix!r}): {completions}')
+    print('\nCompleting prefixes in tree:')
+    for prefix in prefixes:
+        completions = tree.complete(prefix)
+        print(f'complete({prefix!r}): {completions}')
 
     # print('\nRetrieving all strings:')
     # retrieved_strings = tree.strings()
