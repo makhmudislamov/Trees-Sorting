@@ -98,8 +98,8 @@ class PrefixTree:
         completions = []
 
         # base case - prefix is a finished string
-        # if self._find_node(prefix) is True:
-        #     completions.append(prefix)
+        if self._find_node(prefix) is True:
+            completions.append(prefix)
         
         current_node, _ = self._find_node(prefix)
 
