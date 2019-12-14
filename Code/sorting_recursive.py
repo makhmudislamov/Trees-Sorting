@@ -67,10 +67,19 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    # Check if list is so small it's already sorted (base case)
+    if len(items) <= 1:
+        return items
+    else:
+        # Split items list into approximately equal halves
+        mid = len(items) // 2
+        first_half = items[:mid]
+        second_half = items[mid:]
+        # Sort each half by recursively calling merge sort
+        first_half = merge_sort(first_half)
+        second_half = merge_sort(second_half)
+        # Merge sorted halves into one list in sorted order
+        return merge(first_half, second_half)
 
 
 def partition(items, low, high):
