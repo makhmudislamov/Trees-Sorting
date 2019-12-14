@@ -82,6 +82,25 @@ def merge_sort(items):
         return merge(first_half, second_half)
 
 
+def find_median(items: list, low=None, high=None):
+    """
+    Find the median out of 3 numbers and swap the items in the list so median
+    will be at the end of the list
+    """
+    # set the initial values of low and high
+    if low == None and high == None:
+        low = 0
+        high = len(items) - 1
+
+    mid = (high + low) // 2
+
+    if items[mid] < items[low]:
+        items[mid], items[low] = items[low], items[mid]
+    if items[high] < items[low]:
+        items[high], items[low] = items[low], items[high]
+    if items[mid] < items[high]:
+        items[mid], items[high] = items[high], items[mid]
+
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
     `[low...high]` by choosing a pivot (TODO: document your method here) from
@@ -94,6 +113,7 @@ def partition(items, low, high):
     # TODO: Move items less than pivot into front of range [low...p-1]
     # TODO: Move items greater than pivot into back of range [p+1...high]
     # TODO: Move pivot item into final position [p] and return index p
+    
 
 
 def quick_sort(items, low=None, high=None):
