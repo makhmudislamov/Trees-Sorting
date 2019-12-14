@@ -48,8 +48,8 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(n^2) - but depends on the sorting algo we are using.
+    TODO: Memory usage: O(n) - we are creating new list at the end to merge"""
     # Split items list into approximately equal halves
     mid = len(items) // 2
     first_half = items[:mid]
