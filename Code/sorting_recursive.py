@@ -50,9 +50,16 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # Split items list into approximately equal halves
+    mid = len(items) // 2
+    first_half = items[:mid]
+    second_half = items[mid:]
+    # Sort each half using any other sorting algorithm
+    first_half = merge_sort(first_half)
+    second_half = merge_sort(second_half)
+    # Merge sorted halves into one list in sorted order
+    merged = merge(first_half, second_half)
+    return merged
 
 
 def merge_sort(items):
