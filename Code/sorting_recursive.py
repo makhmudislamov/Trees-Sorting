@@ -65,8 +65,8 @@ def split_sort_merge(items):
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(nlogn) - split, then split the splitted ....
+    TODO: Memory usage: O(nlogn) - recursive stack"""
     # Check if list is so small it's already sorted (base case)
     if len(items) <= 1:
         return items
