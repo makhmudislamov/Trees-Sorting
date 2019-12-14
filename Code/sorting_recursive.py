@@ -7,6 +7,40 @@ def merge(items_1, items_2):
     TODO: Running time: O(n) - have to go through the whole array
     TODO: Memory usage: O(m) - we are creating new array which is exact size of the input"""
 
+    # are the lists empty?
+    if not items_1 and not items_2:
+        return []
+
+    # used to merge two sorted lists together
+    merged_list = []
+    index_1 = 0
+    index_2 = 0
+
+    # iterate until at least one of the lists are done
+    while (index_1 < len(items_1)) and (index_2 < len(items_2)):
+        
+        if items_1[index_1] <= items_2[index_2]:
+            merged_list.append(items_1[index_1])
+            index_1 += 1
+        else:
+            merged_list.append(items_2[index_2])
+            index_2 += 1
+
+    # are there any elements left in items_1 list?
+    if index_1 <= len(items_1)-1:
+        # copy the rest of the elements from array items_1 to merged_list
+        while index_1 < len(items_1):
+            merged_list.append(items_1[index_1])
+            index_1 += 1
+
+    # are there any elements left in items_2 list?
+    elif index_2 <= len(items_2)-1:
+        # copy the rest of the elements from array items_2 to merged_list
+        while index_2 < len(items_2):
+            merged_list.append(items_2[index_2])
+            index_2 += 1
+
+    return merged_list
 
 
 
