@@ -4,8 +4,8 @@
 def merge(items_1, items_2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: O(n) - have to go through the whole array
-    TODO: Memory usage: O(m) - we are creating new array which is exact size of the input"""
+    Running time: O(n) - have to go through the whole array
+    Memory usage: O(m) - we are creating new array which is exact size of the input"""
 
     # are the lists empty?
     if not items_1 and not items_2:
@@ -48,8 +48,8 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: O(n^2) - but depends on the sorting algo we are using.
-    TODO: Memory usage: O(n) - we are creating new list at the end to merge"""
+    Running time: O(n^2) - but depends on the sorting algo we are using.
+    Memory usage: O(n) - we are creating new list at the end to merge"""
     # Split items list into approximately equal halves
     mid = len(items) // 2
     first_half = items[:mid]
@@ -65,8 +65,8 @@ def split_sort_merge(items):
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: O(nlogn) - split, then split the splitted ....
-    TODO: Memory usage: O(nlogn) - recursive stack"""
+    Running time: O(nlogn) - split, then split the splitted ....
+    Memory usage: O(nlogn) - recursive stack"""
     # Check if list is so small it's already sorted (base case)
     if len(items) <= 1:
         return items
@@ -106,13 +106,35 @@ def partition(items, low, high):
     `[low...high]` by choosing a pivot (TODO: document your method here) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
+    Running time: ??? Why and under what conditions?
+    Memory usage: ??? Why and under what conditions?"""
+    # Choose a pivot any way and document your method in docstring above
+    # Loop through all items in range [low...high]
+    # Move items less than pivot into front of range [low...p-1]
+    # Move items greater than pivot into back of range [p+1...high]
+    # Move pivot item into final position [p] and return index
+    print(f"low is {low}, high is {high}")
+
+    if high - low >= 2:
+        print(f"items before median: {items}")
+        find_median(items, low, high)
+        print(f"items after: {items}")
+
+    # last element is the pivot
+    pivot = items[high]
+    pivot_index = low
+
+    for i in range(low, high):
+         # if there is smaller number than the pivot, swap it with pivot index
+        if items[i] <= pivot:
+            items[i], items[pivot_index] = items[pivot_index], items[i]
+            # shift the pivot index to right
+            pivot_index += 1
+
+    # swap the pivot num from the end to the pivot index
+    items[high], items[pivot_index] = items[pivot_index], items[high]
+
+    return pivot_index
     
 
 
