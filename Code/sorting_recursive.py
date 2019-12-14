@@ -1,14 +1,13 @@
 #!python
 
 
-def merge(items1, items2):
+def merge(items_1, items_2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    TODO: Running time: O(n) - have to go through the whole array
+    TODO: Memory usage: O(m) - we are creating new array which is exact size of the input"""
+
+
 
 
 def split_sort_merge(items):

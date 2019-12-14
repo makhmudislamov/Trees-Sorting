@@ -49,20 +49,45 @@ class PrefixTree:
         return False
 
 
+
     def insert(self, string):
         """Insert the given string into this prefix tree."""
 
-        current_node = self.root
+        # current_node = self.root
 
-        for _, char in enumerate(string):
-            if current_node.has_child(char):
-                current_node = current_node.get_child(char)
+        # for _, char in enumerate(string):
+        #     if current_node.has_child(char):
+        #         current_node = current_node.get_child(char)
+        #     else:
+        #         current_node.add_child(char, PrefixTreeNode(char))
+        #         current_node = current_node.get_child(char)
+        # # marking the last char as terminal 
+        # current_node.terminal = True
+        # self.size += 1
+# Drew
+        if self.contains(string):
+             return
+        # # Insert string into tree
+        curr_node = self.root
+        for indx, char in enumerate(string):
+            # if char DNE in tree, increase size
+
+            # Traverse to next child in char is alread in string
+            if curr_node.has_child(char):
+                curr_node = curr_node.get_child(char)
+
+            # Otherwise, add the child
             else:
-                current_node.add_child(char, PrefixTreeNode(char))
-                current_node = current_node.get_child(char)
-        # marking the last char as terminal 
-        current_node.terminal = True
-        self.size += 1
+                curr_node.add_child(char, PrefixTreeNode(char))
+                curr_node = curr_node.get_child(char)
+
+            # Change last node in str to terminal
+            if indx == len(string) - 1:
+                curr_node.terminal = True
+                self.size += 1
+
+
+    
             
 
     def _find_node(self, string):
@@ -80,41 +105,40 @@ class PrefixTree:
         for index, char in enumerate(string):
             if current_node.has_child(char):
                 current_node = current_node.get_child(char)
-                # print(f'cur node {char}')
+                return current_node, index + 1 # this line is fixing completions in tongue-twisters but not in the test
             else:
                 return None, index + 1
         # if the last char is terminal
         if current_node.terminal is True:
-            # print("current node is terminal")
+            # print("current node is terminal", current_node)
             return current_node, index + 1
         else:
-            return None, index + 1
-        
+            return None, index + 1        
 
-    def complete(self, prefix=""):
+    def complete(self, prefix=''):
         """Return a list of all strings stored in this prefix tree that start
         with the given prefix string."""
         # Create a list of completions in prefix tree
+        # TODO; debug this method and update Anisha, another project
         completions = []
 
         # base case - prefix is a finished string
         if self._find_node(prefix) is True:
             completions.append(prefix)
-        
-        current_node, _ = self._find_node(prefix)
 
-        if current_node is None:
+        current_node = self._find_node(prefix)[0]
+        print("Current node", current_node) # this is printing None
+        if current_node == None:
             return completions
 
-        if self.is_empty():
-            return completions
-        else:
-            self._traverse(current_node, prefix, completions.append)
+        if not self.is_empty():
+           self._traverse(current_node, prefix, completions.append)
+           print("current node after traverse", current_node)
         
         return completions
 
-
-
+     
+        
     def strings(self):
         """Return a list of all strings stored in this prefix tree."""
         # Create a list of all strings in prefix tree
@@ -128,7 +152,9 @@ class PrefixTree:
             visit(prefix)
 
         for char, child in node.children.items():
-            self._traverse(child, prefix+char, visit)
+            # print(f"char {char} and child {child}")
+            self._traverse(child, prefix + char, visit)
+        
 
 
 def create_prefix_tree(strings):
@@ -169,6 +195,8 @@ def create_prefix_tree(strings):
     retrieved_strings = tree.strings()
     print(f'strings: {retrieved_strings}')
     matches = set(retrieved_strings) == set(strings)
+    print('set(strings): ', set(strings))
+    print('set(retireved_strings): ', set(retrieved_strings))
     print(f'matches? {matches}')
 
 

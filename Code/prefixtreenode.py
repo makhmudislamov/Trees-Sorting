@@ -1,5 +1,5 @@
 #!python3
-
+import collections
 
 class PrefixTreeNode:
     """PrefixTreeNode: A node for use in a prefix tree that stores a single
@@ -34,6 +34,7 @@ class PrefixTreeNode:
             if key:
                 num += 1
         return num
+        
 
     def has_child(self, character):
         """Return True if this prefix tree node has a child node that
