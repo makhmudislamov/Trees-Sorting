@@ -6,11 +6,34 @@ def counting_sort(numbers):
     then looping over counts and copying that many numbers into output list.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Find range of given numbers (minimum and maximum integer values)
-    # TODO: Create list of counts with a slot for each number in input range
-    # TODO: Loop over given numbers and increment each number's count
-    # TODO: Loop over counts and append that many numbers into output list
-    # FIXME: Improve this to mutate input instead of creating new output list
+   
+    
+    if not numbers:
+        return []
+    # Find range of given numbers (minimum and maximum integer values)
+    start = min(numbers)
+    end = max(numbers)
+    # range of given numbers
+    range_nums = end - start
+    # Create list of counts with a slot for each number in input range
+    counts = [0] * (range_nums + 1)
+    # Loop over given numbers and increment each number's count
+    for i, num in enumerate(numbers):  # O(n)
+        # get the right index to increment
+        index = num - start
+        # increment the count of the number
+        counts[index] += 1
+
+    # Loop over counts and append that many numbers into output list
+    output_list = []
+    for i in range(len(counts)):  
+        for _ in range(counts[i]):
+            # redefine the number using the index of counts
+            num = i + start
+            output_list.append(num)
+    # Improve this to mutate input instead of creating new output list
+    numbers[:] = output_list
+    return numbers
 
 
 def bucket_sort(numbers, num_buckets=10):
