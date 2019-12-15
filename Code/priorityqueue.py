@@ -15,7 +15,7 @@ class PriorityQueue(object):
 
     def __repr__(self):
         """Return a string representation of this priority queue."""
-        return 'PriorityQueue({} items, front={})'.format(self.size(), self.front())
+        return 'PriorityQueue({} items, front={})'.format(self.length(), self.front())
 
     def is_empty(self):
         """Return True if this priority queue is empty, or False otherwise."""
@@ -28,8 +28,9 @@ class PriorityQueue(object):
     def enqueue(self, item, priority):
         """Insert the given item into this priority queue in order according to
         the given priority."""
-        # TODO: Insert given item into heap in order according to given priority
-        # ...
+        # Insert given item into heap in order according to given priority
+        new_entry = (priority, item)
+        self.heap.insert(new_entry)
 
     def front(self):
         """Return the item at the front of this priority queue without removing
