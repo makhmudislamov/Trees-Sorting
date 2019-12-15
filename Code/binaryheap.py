@@ -119,13 +119,16 @@ class BinaryMinHeap(object):
         left_index = self._left_child_index(index)
         right_index = self._right_child_index(index)
         max_indx = index
+
         if left_index <= self._last_index() and self.items[left_index] < item:
-            largest = left_index
+            max_indx = left_index
+
         if right_index <= self._last_index() and self.items[right_index] < self.items[max_indx]:
-            largest = right_index
-        if largest != index:
+            max_indx = right_index
+
+        if max_indx != index:
             self.items[index], self.items[max_indx] = self.items[max_indx], self.items[index]
-            if largest != len(self.items) - 1:
+            if max_indx != len(self.items) - 1:
                 self._bubble_down(max_indx)
 
     def _last_index(self):
