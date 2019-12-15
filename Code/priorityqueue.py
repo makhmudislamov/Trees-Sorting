@@ -29,7 +29,7 @@ class PriorityQueue(object):
         """Insert the given item into this priority queue in order according to
         the given priority."""
         # Insert given item into heap in order according to given priority
-        new_entry = (priority, item)
+        new_entry = (item, priority)
         self.heap.insert(new_entry)
 
     def front(self):
@@ -56,5 +56,8 @@ class PriorityQueue(object):
         This method is more efficient than calling dequeue and then enqueue."""
         if self.length() == 0:
             raise ValueError('Priority queue is empty and has no front item')
-        # TODO: Replace and return minimum item from heap
-        # ...
+        # Replace and return minimum item from heap
+        min_item = self.front()
+        # replacing
+        self.heap.items[0] = (item, priority)
+        return min_item
