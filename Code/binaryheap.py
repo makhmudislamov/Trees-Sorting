@@ -109,21 +109,24 @@ class BinaryMinHeap(object):
         out of order. Maximum path length in complete binary tree is log n."""
         if not (0 <= index <= self._last_index()):
             raise IndexError('Invalid index: {}'.format(index))
+        
+
+        # if left_index > self._last_index():
+        #     return  # This index is a leaf node (does not have any children)
+        # Get the item's value
+        item = self.items[index]
         # Get the index of the item's left and right children
         left_index = self._left_child_index(index)
         right_index = self._right_child_index(index)
-        if left_index > self._last_index():
-            return  # This index is a leaf node (does not have any children)
-        # Get the item's value
-        item = self.items[index]
-        # TODO: Determine which child item to compare this node's item to
-        child_index = 0
-        # ...
-        # TODO: Swap this item with a child item if values are out of order
-        child_item = self.items[child_index]
-        # ...
-        # TODO: Recursively bubble down again if necessary
-        # ...
+        max_indx = index
+        if left_index <= self._last_index() and self.items[left_index] < item:
+            largest = left_index
+        if right_index <= self._last_index() and self.items[right_index] < self.items[max_indx]:
+            largest = right_index
+        if largest != index:
+            self.items[index], self.items[max_indx] = self.items[max_indx], self.items[index]
+            if largest != len(self.items) - 1:
+                self._bubble_down(max_indx)
 
     def _last_index(self):
         """Return the last valid index in the underlying array of items."""
