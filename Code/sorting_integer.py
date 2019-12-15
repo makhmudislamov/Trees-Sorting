@@ -47,3 +47,9 @@ def bucket_sort(numbers, num_buckets=10):
     # TODO: Sort each bucket using any sorting algorithm (recursive or another)
     # TODO: Loop over buckets and append each bucket's numbers into output list
     # FIXME: Improve this to mutate input instead of creating new output list
+
+
+if __name__ == "__main__":
+    # test
+    numbers = [12, 2, 45, 0, 1, 3]
+    print(counting_sort(numbers))
